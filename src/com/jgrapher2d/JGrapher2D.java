@@ -34,26 +34,26 @@ public class JGrapher2D extends JComponent {
         mouse = new Mouse();
 
         // Априорная инициализация параметров системы координат
-        setCSAngles(true, true, true, true);
+        coordinateSystem.setAngles(true, true, true, true);
 
         // Априорная инициализация параметров координатных осей
-        setCSAbsShift(DEFABSSHIFT);
-        setCSOrdShift(DEFORDSHIFT);
-        setCSAbsMeasure(DEFABSMEASURE);
-        setCSOrdMeasure(DEFORDMEASURE);
-        setCSAbsExpansion(DEFABSEXPANSION);
-        setCSOrdExpansion(DEFORDEXPANSION);
-        setCSAbsValues(true);
-        setCSOrdValues(true);
-        setCSAbsDashLines(true);
-        setCSOrdDashLines(true);
+        coordinateSystem.getAbs().setShift(DEFABSSHIFT);
+        coordinateSystem.getOrd().setShift(DEFORDSHIFT);
+        coordinateSystem.getAbs().setMeasure(DEFABSMEASURE);
+        coordinateSystem.getOrd().setMeasure(DEFORDMEASURE);
+        coordinateSystem.getAbs().setExpansion(DEFABSEXPANSION);
+        coordinateSystem.getOrd().setExpansion(DEFORDEXPANSION);
+        coordinateSystem.getAbs().setValues(true);
+        coordinateSystem.getOrd().setValues(true);
+        coordinateSystem.getAbs().setDashLines(true);
+        coordinateSystem.getOrd().setDashLines(true);
 
         // Априорная инициализация параметров увеличения
-        setCSZoomMin(DEFZOOMMIN);
-        setCSZoomMax(DEFZOOMMAX);
-        setCSZoom(DEFZOOMVALUE);
-        setCSZoomStep(DEFZOOMSTEP);
-        setCSZoomCenter(false);
+        coordinateSystem.getZoom().setMin(DEFZOOMMIN);
+        coordinateSystem.getZoom().setMax(DEFZOOMMAX);
+        coordinateSystem.getZoom().setValue(DEFZOOMVALUE);
+        coordinateSystem.getZoom().setStep(DEFZOOMSTEP);
+        coordinateSystem.getZoom().setCenter(true);
 
         // Априорная инициализация типа курсора мыши
         mouse.setCursor(Cursor.getPredefinedCursor(Cursor.CROSSHAIR_CURSOR));
@@ -371,9 +371,7 @@ public class JGrapher2D extends JComponent {
 
     }
 
-    // ПАРАМЕТРЫ СИСТЕМЫ КООРДИНАТ
-
-    // Смещение системы координат
+    // Параметры смещения системы координат
 
     protected float getCSAbsTranslate() {
         return getWidth() / 2.0F + coordinateSystem.getAbs().getShift();
@@ -391,207 +389,6 @@ public class JGrapher2D extends JComponent {
 
     protected float getCSOrdScale() {
         return (- 1.0F) * coordinateSystem.getZoom().getValue() * coordinateSystem.getOrd().getExpansion() / coordinateSystem.getOrd().getMeasure();
-    }
-
-    /// Отображаемые координатные углы
-
-    protected boolean setCSAngles(boolean first, boolean second, boolean third, boolean fourth) {
-        return coordinateSystem.setAngles(first, second, third, fourth);
-
-    }
-
-    protected boolean isCSFirst() {
-        return coordinateSystem.isFirst();
-    }
-
-    protected boolean isCSSecond() {
-        return coordinateSystem.isSecond();
-    }
-
-    protected boolean isCSThird() {
-        return coordinateSystem.isThird();
-    }
-
-    protected boolean isCSFourth() {
-        return coordinateSystem.isFourth();
-    }
-
-    // ПАРАМЕТРЫ ОСИ АБСЦИСС
-
-    // Сдвиг относительно центра окна
-
-    protected void setCSAbsShift(float shift) {
-        coordinateSystem.getAbs().setShift(shift);
-    }
-
-    protected float getCSAbsShift() {
-        return coordinateSystem.getAbs().getShift();
-    }
-
-    // Количество единиц измерения в одном делении
-
-    protected boolean setCSAbsMeasure(float measure) {
-        return coordinateSystem.getAbs().setMeasure(measure);
-    }
-
-    protected float getCSAbsMeasure() {
-        return coordinateSystem.getAbs().getMeasure();
-    }
-
-    // Растяжение осей
-
-    protected boolean setCSAbsExpansion(float expansion) {
-        return coordinateSystem.getAbs().setExpansion(expansion);
-    }
-
-    protected float getCSAbsExpansion() {
-        return coordinateSystem.getAbs().getExpansion();
-    }
-
-    // Отображение цифровых значений
-
-    protected void setCSAbsValues(boolean values) {
-        coordinateSystem.getAbs().setValues(values);
-    }
-
-    protected boolean isCSAbsValues() {
-        return coordinateSystem.getAbs().isValues();
-    }
-
-    // Отображение пунктирных линий
-
-    protected void setCSAbsDashLines(boolean dashLines) {
-        coordinateSystem.getAbs().setDashLines(dashLines);
-    }
-
-    protected boolean isCSAbsDashLines() {
-        return coordinateSystem.getAbs().isDashLines();
-    }
-
-    // ПАРАМЕТРЫ ОСИ ОРДИНАТ
-
-    /// Сдвиг относительно центра окна
-
-    protected void setCSOrdShift(float shift) {
-        coordinateSystem.getOrd().setShift(shift);
-    }
-
-    protected float getCSOrdShift() {
-        return coordinateSystem.getOrd().getShift();
-    }
-
-    // Количество единиц измерения в одном делении
-
-    protected boolean setCSOrdMeasure(float measure) {
-        return coordinateSystem.getOrd().setMeasure(measure);
-    }
-
-    protected float getCSOrdMeasure() {
-        return coordinateSystem.getOrd().getMeasure();
-    }
-
-    // Растяжение осей
-
-    protected boolean setCSOrdExpansion(float expansion) {
-        return coordinateSystem.getOrd().setExpansion(expansion);
-    }
-
-    protected float getCSOrdExpansion() {
-        return coordinateSystem.getOrd().getExpansion();
-    }
-
-    // Отображение цифровых значений
-
-    protected void setCSOrdValues(boolean values) {
-        coordinateSystem.getOrd().setValues(values);
-    }
-
-    protected boolean isCSOrdValues() {
-        return coordinateSystem.getOrd().isValues();
-    }
-
-    // Отображение пунктирных линий
-
-    protected void setCSOrdDashLines(boolean dashLines) {
-        coordinateSystem.getOrd().setDashLines(dashLines);
-    }
-
-    protected boolean isCSOrdDashLines() {
-        return coordinateSystem.getOrd().isDashLines();
-    }
-
-    // ПАРАМЕТРЫ ЗУМИРОВАНИЯ
-
-    // Количество пикселей в одном делении
-
-    protected boolean setCSZoom(int zoom) {
-        return coordinateSystem.getZoom().setValue(zoom);
-    }
-
-    protected int getCSZoom() {
-        return coordinateSystem.getZoom().getValue();
-    }
-
-    // Нижняя граница зумирования
-
-    protected boolean setCSZoomMin(int zoomMin) {
-        return coordinateSystem.getZoom().setMin(zoomMin);
-    }
-
-    protected int getCSZoomMin() {
-        return coordinateSystem.getZoom().getMin();
-    }
-
-    // Верхняя граница зумирования
-
-    protected boolean setCSZoomMax(int zoomMax) {
-        return coordinateSystem.getZoom().setMax(zoomMax);
-    }
-
-    protected int getCSZoomMax() {
-        return coordinateSystem.getZoom().getMax();
-    }
-
-    // Шаг изменения зума
-
-    protected boolean setCSZoomStep(int zoomStep) {
-        return coordinateSystem.getZoom().setStep(zoomStep);
-    }
-
-    protected int getCSZoomStep() {
-        return coordinateSystem.getZoom().getStep();
-    }
-
-    // Зумирование относительно центра системы координат
-
-    protected void setCSZoomCenter(boolean zoomCenter) {
-        coordinateSystem.getZoom().setCenter(zoomCenter);
-    }
-
-    protected boolean isCSZoomCenter() {
-        return coordinateSystem.getZoom().isCenter();
-    }
-
-    // ПАРАМЕТРЫ КУРСОРА МЫШИ
-
-    // Последняя позиция курсора мыши при нажатии
-    protected Point2D getMPosClick() {
-        return mouse.getPos().getClick();
-    }
-
-    // Последняя позиция курсора мыши без нажатия
-    protected Point2D getMPosNoClick() {
-        return mouse.getPos().getNoClick();
-    }
-
-    // Тип курсора
-
-    protected void setMCursor(Cursor cursor) {
-        mouse.setCursor(cursor);
-    }
-
-    protected Cursor getMCursor() {
-        return mouse.getCursor();
     }
 
     // private
